@@ -12,14 +12,23 @@ try {
     "Marriott",
     "New York",
     "123 Broadway St",
-    [RoomType.Delux, RoomType.Suit, RoomType.SuperDelux]
+    [RoomType.Delux, RoomType.Suit, RoomType.SuperDelux],
+    new Map([
+      [RoomType.Delux, 100],
+      [RoomType.Suit, 200],
+      [RoomType.SuperDelux, 300],
+    ])
   );
 
   const hotel2 = hotelSystemManager.addHotel(
     "Hilton",
     "Los Angeles",
     "456 Hollywood Blvd",
-    [RoomType.Delux, RoomType.Suit]
+    [RoomType.Delux, RoomType.Suit],
+    new Map([
+      [RoomType.Delux, 100],
+      [RoomType.Suit, 200],
+    ])
   );
 
   console.log(

@@ -52,7 +52,7 @@ export class ReserveManager {
       reservation
         .getHotel()
         .addReservedRooms(roomType, reservation.getNumberOfRooms());
-      reservation.changeStatus(ReservationStatus.CONFIRMED);
+      // reservation.changeStatus(ReservationStatus.CONFIRMED);
       return reservation;
     } else {
       console.log("Not enough rooms");
@@ -91,5 +91,21 @@ export class ReserveManager {
     return this.reservations.filter(
       (reservation) => reservation.getHotel() === hotel
     );
+  }
+
+  public getReservationById(id: string): Reservation | undefined {
+    return this.reservations.find((reservation) => reservation.getId() === id);
+  }
+
+  public getAmount(reservationId: string): number {
+    const reservation = this.getReservationById(reservationId);
+    if (!reservation) {
+      console.log("Reservation not found");
+      return 0;
+    }
+    const roomType = reservation.getRoomType();
+    const numberOfRooms = reservation.getNumberOfRooms();
+    const price = reservation.getHotel().getPriceByRoomType(roomType);
+    return price * numberOfRooms;
   }
 }

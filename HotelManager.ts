@@ -19,9 +19,10 @@ export class HotelManager {
     name: string,
     location: string,
     address: string,
-    roomTypes: RoomType[]
+    roomTypes: RoomType[],
+    prices: Map<RoomType, number>
   ): Hotel {
-    const hotel = new Hotel(name, location, address, roomTypes);
+    const hotel = new Hotel(name, location, address, roomTypes, prices);
     this.hotels.push(hotel);
     return hotel;
   }

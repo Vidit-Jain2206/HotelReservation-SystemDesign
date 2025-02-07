@@ -12,12 +12,14 @@ export class Hotel {
   private roomTypes: RoomType[];
   private totalRooms: Map<RoomType, number>;
   private reservedRooms: Map<RoomType, number>;
+  private prices: Map<RoomType, number>;
 
   constructor(
     name: string,
     location: string,
     address: string,
-    roomTypes: RoomType[]
+    roomTypes: RoomType[],
+    prices: Map<RoomType, number>
   ) {
     this.id = Math.floor(Math.random() * 1000000).toString();
     this.name = name;
@@ -32,8 +34,20 @@ export class Hotel {
     for (const roomType of this.roomTypes) {
       this.reservedRooms.set(roomType, 0);
     }
+    this.prices = prices;
   }
 
+  public getPrices(): Map<RoomType, number> {
+    return this.prices;
+  }
+
+  public getPriceByRoomType(roomType: RoomType): number {
+    return this.prices.get(roomType) ?? 0;
+  }
+
+  public setPriceByRoomType(roomType: RoomType, price: number) {
+    this.prices.set(roomType, price);
+  }
   public getId(): string {
     return this.id;
   }
