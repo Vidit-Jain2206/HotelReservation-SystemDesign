@@ -106,6 +106,21 @@ export class ReserveManager {
     const roomType = reservation.getRoomType();
     const numberOfRooms = reservation.getNumberOfRooms();
     const price = reservation.getHotel().getPriceByRoomType(roomType);
-    return price * numberOfRooms;
+    const noOfDays = this.getNoOfDays(reservation.getId());
+    return price * numberOfRooms * noOfDays;
+  }
+
+  public getNoOfDays(reservationId: string): number {
+    const reservation = this.reservations.find(
+      (reservation) => reservation.getId() === reservationId
+    );
+    if (!reservation) {
+      console.log("Reservation not found");
+      return 0;
+    }
+    const checkInDate = reservation.getCheckInDate();
+    const checkOutDate = reservation.getCheckOutDate();
+    const noOfDays = checkOutDate.getTime() - checkInDate.getTime();
+    return Math.ceil(noOfDays / (1000 * 60 * 60 * 24));
   }
 }
